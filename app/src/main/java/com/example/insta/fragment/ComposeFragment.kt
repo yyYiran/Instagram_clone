@@ -136,27 +136,7 @@ class ComposeFragment : Fragment() {
         return File(mediaStorageDir.path + File.separator + fileName)
     }
 
-    private fun queryPosts() {
-        val query: ParseQuery<Post> = ParseQuery.getQuery(Post::class.java)
 
-        // By default, when fetching an object, related ParseObjects (pointer to user) are not fetched
-        query.include(Post.KEY_AUTHOR)
-        query.findInBackground { posts, e ->
-            if (e != null) {
-                Log.e(TAG, "error in fetching posts")
-                e.printStackTrace()
-            } else {
-                if (posts != null) {
-                    for (post in posts) {
-                        Log.d(
-                            TAG,
-                            "done: " + post.getDescription() + " username: " + post.getAuthor()?.username
-                        )
-                    }
-                }
-            }
-        }
-    }
 
     private fun savePost(description: String, photoFile: File) {
         val newPost = Post()

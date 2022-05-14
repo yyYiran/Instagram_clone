@@ -17,6 +17,7 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import com.example.insta.fragment.ComposeFragment
 import com.example.insta.fragment.FeedFragment
+import com.example.insta.fragment.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.parse.*
 import java.io.File
@@ -37,15 +38,15 @@ class MainActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
         val composeFragment = ComposeFragment()
         val feedFragment = FeedFragment()
+        val profileFragment = ProfileFragment()
         val btmNavi = findViewById<BottomNavigationView>(R.id.btmNavi)
         btmNavi.setOnItemSelectedListener { item ->
             lateinit var fragmentToShow:Fragment //default screen to show
             when (item.itemId){
-                R.id.ic_home -> {
-                    fragmentToShow = feedFragment
-                }
+                R.id.ic_home -> { fragmentToShow = feedFragment }
                 R.id.ic_compose -> {fragmentToShow = composeFragment}
-                R.id.ic_profile -> {Log.d(TAG, "onCreate: ic_profile")}
+                R.id.ic_profile -> fragmentToShow = profileFragment
+                else -> fragmentToShow = feedFragment
             }
             if (fragmentToShow != null)
                 fragmentManager.beginTransaction().replace(R.id.frameContainer, fragmentToShow).commit()
@@ -56,13 +57,6 @@ class MainActivity : AppCompatActivity() {
 
 //        queryPosts()
     }
-
-
-
-
-
-//            newPost.setImage("")
-        // Immediately save the data asynchronously
 
 
 }
